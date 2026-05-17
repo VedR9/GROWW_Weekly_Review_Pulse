@@ -28,6 +28,7 @@ jobs:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GOOGLE_DOC_ID: ${{ secrets.GOOGLE_DOC_ID }}
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          MCP_SERVER_URL: ${{ secrets.MCP_SERVER_URL }}
           PYTHONPATH: phases/phase-01-data-and-compliance:phases/phase-02-pulse-generation:phases/phase-03-mcp-workspace
         run: |
           python phases/phase-04-e2e-and-operations/e2e_runner.py
