@@ -1,0 +1,10 @@
+{
+  "rows_read": 5,
+  "rows_after_window": 4,
+  "rows_output": 3,
+  "duplicates_dropped": 1,
+  "empty_body_skipped": 0,
+  "invalid_row_skipped": 0,
+  "pii_redactions": 2,
+  "warnings": []
+}

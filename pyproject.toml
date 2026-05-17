@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "weekly-pulse-agent"
+version = "0.1.0"
+description = "Weekly app review pulse agent — phased implementation (Phase 1: ingest)."
+readme = "phases/phase-01-data-and-compliance/README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+
+[project.scripts]
+review-ingest = "review_ingest.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["phases/phase-01-data-and-compliance"]
+
+[tool.pytest.ini_options]
+testpaths = ["phases/phase-01-data-and-compliance/tests"]
+pythonpath = ["phases/phase-01-data-and-compliance"]
