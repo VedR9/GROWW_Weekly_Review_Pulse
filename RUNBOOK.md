@@ -7,9 +7,9 @@ This runbook describes the end-to-end operation of the **GROWW - Weekly Review P
 1. **Python Environment**: `python 3.10+` with dependencies listed in `pyproject.toml` (or using the `mcp`, `groq`, `httpx` and `python-dotenv` packages).
 2. **Environment Variables (`.env`)**:
    - `GROQ_API_KEY`: API Key for the Groq LLM.
-   - `GOOGLE_DOC_ID`: The ID of the target Google Doc (e.g., `1mXXX8-ggVEteGS9rC3s3H_Bq4NZAfTM89sU9Q1OBi5E`).
-   - `EMAIL_TO`: The target email for the draft (e.g., `creditcardbhaina@gmail.com`).
-3. **MCP Server**: The remote MCP Server (`https://saksham-mcp-server-dvvb.onrender.com/`) must be running and have valid `GOOGLE_CREDENTIALS_JSON` and `GOOGLE_TOKEN_JSON` configured in its deployment environment to interact with Google Workspace.
+   - `GOOGLE_DOC_ID`: The ID of the target Google Doc (e.g., `your_google_doc_id_here`).
+   - `EMAIL_TO`: The target email for the draft (e.g., `your_email@example.com`).
+3. **MCP Server**: The remote MCP Server (`https://your-mcp-server.onrender.com/`) must be running and have valid `GOOGLE_CREDENTIALS_JSON` and `GOOGLE_TOKEN_JSON` configured in its deployment environment to interact with Google Workspace.
 
 ## Execution
 

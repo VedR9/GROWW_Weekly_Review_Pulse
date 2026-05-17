@@ -4,7 +4,9 @@ from typing import Dict, Any
 
 logger = logging.getLogger(__name__)
 
-BASE_URL = "https://saksham-mcp-server-dvvb.onrender.com"
+import os
+
+BASE_URL = os.getenv("MCP_SERVER_URL", "https://your-mcp-server.onrender.com")
 
 def append_to_google_doc(doc_id: str, content: str) -> Dict[str, Any]:
     url = f"{BASE_URL}/append_to_doc"

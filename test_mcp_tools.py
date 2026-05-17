@@ -6,8 +6,10 @@ from mcp.client.session import ClientSession
 
 logging.basicConfig(level=logging.INFO)
 
+import os
+
 async def run():
-    url = "https://saksham-mcp-server-dvvb.onrender.com/sse"
+    url = os.getenv("MCP_SERVER_URL", "https://your-mcp-server.onrender.com") + "/sse"
     print(f"Connecting to {url}")
     
     try:

@@ -26,7 +26,7 @@ This file records **substantive decisions** made while shaping this project—pr
 
 **Date:** 2026-05-17  
 **Status:** Accepted  
-**Context:** The provided MCP Server (`saksham-mcp-server-dvvb.onrender.com`) exposes a FastAPI REST layer (`/append_to_doc`, `/create_email_draft`) rather than standard MCP SSE or Stdio protocol.  
+**Context:** The provided MCP Server (`your-mcp-server.onrender.com`) exposes a FastAPI REST layer (`/append_to_doc`, `/create_email_draft`) rather than standard MCP SSE or Stdio protocol.  
 **Decision:** Integrate Phase 3 directly using HTTP `POST` requests via `httpx` to those explicitly exposed endpoints, instead of using the `mcp` Python client SDK.  
 **Consequences:** Coupling to this specific server implementation's REST signature; auth issues inside the MCP server are bubbled up but cannot be solved client-side.  
 **Alternatives considered:** Forcing SSE connection (rejected: server returned 404).
