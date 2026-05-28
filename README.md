@@ -15,6 +15,12 @@ A premium, backend-less React dashboard designed specifically for Product Manage
 - **AI Action Ideas**: The LLM suggests strategic product roadmap items based on the week's top complaints, presented as a clear checklist.
 - **Platform Sentiment Splits**: Breaks down the average app rating into 🍏 iOS App Store and 🤖 Android Play Store specific metrics.
 
+  
+
+https://github.com/user-attachments/assets/d5476bf1-4e94-4f15-98cc-766a33f2dfac
+
+
+
 ## ⚙️ Architecture & Data Flow
 
 This project utilizes a modern **Serverless / GitOps** architecture to run entirely for free without needing a database:
