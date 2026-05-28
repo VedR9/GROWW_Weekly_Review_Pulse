@@ -94,6 +94,23 @@ def main():
                 {"name": "Faster Login", "percentage": 8}
             ]
 
+        # Extract Action Ideas using regex
+        action_ideas = []
+        action_section = re.search(r"## Action Ideas(.*?)(?:##|$)", pulse_markdown, re.DOTALL)
+        if action_section:
+            lines = action_section.group(1).strip().split('\n')
+            for line in lines:
+                match = re.search(r"-\s+(.*)", line.strip())
+                if match:
+                    action_ideas.append(match.group(1).strip())
+        
+        if not action_ideas:
+            action_ideas = [
+                "**Prioritize Login Issue Fix**: Allocate resources to resolve the login issues.",
+                "**Simplify Statement Download**: Redesign the statement download process.",
+                "**Enhance Customer Support**: Increase customer support staff."
+            ]
+
         # Build the new record
         new_record = {
             "date": datetime.now().strftime("%Y-%m-%d"),
@@ -105,7 +122,8 @@ def main():
             "crash_rate": round(crash_rate * 100, 1),
             "app_store_rating": round(app_store_rating, 1),
             "play_store_rating": round(play_store_rating, 1),
-            "feature_requests": feature_requests[:3]
+            "feature_requests": feature_requests[:3],
+            "action_ideas": action_ideas[:3]
         }
         
         history_data = []
