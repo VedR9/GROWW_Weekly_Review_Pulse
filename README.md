@@ -2,6 +2,8 @@
 
 An automated end-to-end pipeline and sleek Product Analytics Dashboard to ingest app reviews, generate actionable AI insights, and surface them for Product Managers.
 
+https://groww-weekly-review-pulse.vercel.app/
+
 ## Overview
 
 The **GROWW Weekly Review Pulse** addresses the challenge of manually parsing hundreds of app reviews every week. It autonomously aggregates feedback into clear themes and actionable insights, drafts an email, appends notes to a Google Doc, and **powers a real-time web dashboard**—all completely automatically.
