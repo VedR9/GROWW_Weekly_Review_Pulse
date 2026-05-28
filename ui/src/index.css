@@ -263,9 +263,6 @@ body {
 }
 
 .alert-banner {
-  background: rgba(239, 68, 68, 0.15);
-  border: 1px solid rgba(239, 68, 68, 0.4);
-  color: #fca5a5;
   padding: 1rem 1.5rem;
   border-radius: 12px;
   margin-bottom: 2rem;
@@ -273,6 +270,10 @@ body {
   align-items: center;
   gap: 0.75rem;
   font-size: 1.05rem;
+  border: 1px solid transparent;
+}
+
+.alert-banner.critical {
   animation: pulseAlert 2s infinite;
 }
 

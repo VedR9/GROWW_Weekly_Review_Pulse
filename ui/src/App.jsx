@@ -58,15 +58,32 @@ function App() {
     );
   };
 
+  const getCrashComparison = () => {
+    if (!previous || typeof previous.crash_rate === 'undefined') return null;
+    const diff = latest.crash_rate - previous.crash_rate;
+    if (diff > 0) {
+      return <span style={{ color: '#ef4444' }}>Up {diff.toFixed(1)}% from last week. Issues are NOT resolved.</span>;
+    } else if (diff < 0) {
+      return <span style={{ color: 'var(--accent-primary)' }}>Down {Math.abs(diff).toFixed(1)}% from last week. Bugs are being fixed! 🎉</span>;
+    }
+    return <span>Unchanged from last week.</span>;
+  };
+
   return (
     <div className="dashboard-container">
-      {/* Critical Bug Alert Banner */}
-      {latest.critical_alert && (
-        <div className="alert-banner">
-          <AlertTriangle size={20} />
-          <strong>CRITICAL ALERT:</strong> High volume of crash/bug reports detected this week ({latest.crash_rate}% of reviews).
+      {/* Dynamic Crash/Health Banner */}
+      <div className={`alert-banner ${latest.critical_alert ? 'critical' : 'healthy'}`} style={{
+        background: latest.critical_alert ? 'rgba(239, 68, 68, 0.15)' : 'rgba(0, 208, 156, 0.1)',
+        borderColor: latest.critical_alert ? 'rgba(239, 68, 68, 0.4)' : 'rgba(0, 208, 156, 0.3)',
+        color: latest.critical_alert ? '#fca5a5' : 'var(--accent-primary)'
+      }}>
+        <AlertTriangle size={20} />
+        <div>
+          <strong>{latest.critical_alert ? 'CRITICAL ALERT:' : 'SYSTEM HEALTH:'}</strong> 
+          {' '}Crash/Bug reports at {latest.crash_rate}%. 
+          {' '}{getCrashComparison()}
         </div>
-      )}
+      </div>
 
       <header className="dashboard-header">
         <div>
