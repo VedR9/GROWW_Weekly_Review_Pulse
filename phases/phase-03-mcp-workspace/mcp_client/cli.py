@@ -39,8 +39,13 @@ def main():
         logging.info("Pushing pulse to Google Docs via MCP...")
         doc_resp = append_to_google_doc(args.doc_id, pulse_content)
         logging.info(f"Docs MCP Response: {doc_resp}")
+        # If the MCP server returns an error JSON, we should also fail
+        if isinstance(doc_resp, dict) and doc_resp.get('status') == 'error':
+            logging.error(f"MCP Server returned an error: {doc_resp.get('message')} - {doc_resp.get('details')}")
+            sys.exit(1)
     except Exception as e:
         logging.error(f"Failed to append to Google Doc: {e}")
+        sys.exit(1)
         
     # Create Gmail Draft -> Send Email
     try:
@@ -48,8 +53,12 @@ def main():
         subject = f"GROWW - Weekly Review Pulse - {datetime.now().strftime('%Y-%m-%d')}"
         email_resp = send_email(to=args.email_to, subject=subject, body=pulse_content)
         logging.info(f"Gmail MCP Response: {email_resp}")
+        if isinstance(email_resp, dict) and email_resp.get('status') == 'error':
+            logging.error(f"MCP Server returned an error: {email_resp.get('message')} - {email_resp.get('details')}")
+            sys.exit(1)
     except Exception as e:
         logging.error(f"Failed to send email: {e}")
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()

@@ -10,7 +10,10 @@ def run_step(name: str, cmd: list):
     logging.info(f"=== Starting {name} ===")
     try:
         result = subprocess.run(cmd, check=True, text=True, capture_output=True)
-        logging.info(result.stdout)
+        if result.stdout:
+            logging.info(result.stdout)
+        if result.stderr:
+            logging.info(result.stderr)
         logging.info(f"=== Finished {name} ===")
     except subprocess.CalledProcessError as e:
         logging.error(f"Error in {name}:")
