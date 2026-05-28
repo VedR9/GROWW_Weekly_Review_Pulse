@@ -38,5 +38,49 @@ def main():
         
     logging.info(f"Successfully generated Weekly Pulse at {out_path}")
 
+    # --- NEW: Append to history.json for the Dashboard ---
+    try:
+        import json, re
+        from datetime import datetime
+        history_path = Path("ui/public/history.json")
+        
+        # Calculate metrics
+        total_reviews = len(reviews)
+        avg_rating = sum(r.get("rating", 3) for r in reviews) / total_reviews if total_reviews else 0
+        sentiment_score = int(min(100, max(0, (avg_rating - 1) / 4 * 100)))
+        
+        # Extract top theme using regex
+        theme_match = re.search(r"1\.\s+\[?(?:\*\*)?(.*?)(?:\*\*)?\]?:", pulse_markdown)
+        if not theme_match:
+            theme_match = re.search(r"1\.\s+(?:\*\*)?(.*?)(?:\*\*)?:", pulse_markdown)
+            
+        top_theme = theme_match.group(1).strip() if theme_match else "General Feedback"
+        
+        # Build the new record
+        new_record = {
+            "date": datetime.now().strftime("%Y-%m-%d"),
+            "total_reviews": total_reviews,
+            "avg_rating": round(avg_rating, 1),
+            "top_theme": top_theme,
+            "sentiment_score": sentiment_score
+        }
+        
+        history_data = []
+        if history_path.exists():
+            with open(history_path, "r", encoding="utf-8") as f:
+                history_data = json.load(f)
+                
+        # Remove any existing record for today to prevent duplicates
+        history_data = [d for d in history_data if d.get("date") != new_record["date"]]
+        history_data.append(new_record)
+        
+        history_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(history_path, "w", encoding="utf-8") as f:
+            json.dump(history_data, f, indent=2)
+            
+        logging.info("Successfully updated history.json for the dashboard")
+    except Exception as e:
+        logging.error(f"Failed to update history.json: {e}")
+
 if __name__ == "__main__":
     main()

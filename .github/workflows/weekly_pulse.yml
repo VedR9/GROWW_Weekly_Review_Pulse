@@ -32,3 +32,11 @@ jobs:
           PYTHONPATH: phases/phase-01-data-and-compliance:phases/phase-02-pulse-generation:phases/phase-03-mcp-workspace
         run: |
           python phases/phase-04-e2e-and-operations/e2e_runner.py
+
+      - name: Commit Updated Dashboard History
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add ui/public/history.json
+          # Only commit if there are changes
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: update dashboard history.json [skip ci]" && git push)

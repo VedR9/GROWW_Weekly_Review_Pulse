@@ -1,0 +1,30 @@
+[
+  {
+    "date": "2026-05-07",
+    "total_reviews": 850,
+    "avg_rating": 3.4,
+    "top_theme": "App crashes on login",
+    "sentiment_score": 45
+  },
+  {
+    "date": "2026-05-14",
+    "total_reviews": 920,
+    "avg_rating": 3.7,
+    "top_theme": "UI update is confusing",
+    "sentiment_score": 58
+  },
+  {
+    "date": "2026-05-21",
+    "total_reviews": 1105,
+    "avg_rating": 4.1,
+    "top_theme": "Mutual fund SIPs are smooth",
+    "sentiment_score": 72
+  },
+  {
+    "date": "2026-05-28",
+    "total_reviews": 728,
+    "avg_rating": 3.5,
+    "top_theme": "Login Issues",
+    "sentiment_score": 62
+  }
+]
