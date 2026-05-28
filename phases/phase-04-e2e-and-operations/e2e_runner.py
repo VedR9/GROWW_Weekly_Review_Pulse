@@ -38,10 +38,10 @@ def main():
     ])
 
     # 1. Phase 1: Ingest
-    # python -m review_ingest.cli --input synthetic_reviews.csv --output out/normalized.jsonl --weeks 52
     run_step("Phase 1: Review Ingestion & Normalization", [
         sys.executable, "-m", "review_ingest.cli",
-        "--input", "synthetic_reviews.csv",
+        "--input", "phases/phase-01-data-and-compliance/fixtures/sample_play_store.csv",
+        "--input", "phases/phase-01-data-and-compliance/fixtures/sample_app_store.csv",
         "--output", "out/normalized.jsonl",
         "--weeks", "52"
     ])
