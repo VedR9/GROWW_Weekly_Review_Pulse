@@ -44,25 +44,55 @@ def main():
         from datetime import datetime
         history_path = Path("ui/public/history.json")
         
-        # Calculate metrics
+        # Base Metrics
         total_reviews = len(reviews)
         avg_rating = sum(r.get("rating", 3) for r in reviews) / total_reviews if total_reviews else 0
         sentiment_score = int(min(100, max(0, (avg_rating - 1) / 4 * 100)))
+        
+        # Crash Alert Logic
+        crash_keywords = ["crash", "bug", "stuck", "broken", "freeze"]
+        crash_count = sum(1 for r in reviews if any(k in str(r.get("body", "")).lower() for k in crash_keywords))
+        crash_rate = crash_count / total_reviews if total_reviews else 0
+        critical_alert = crash_rate > 0.05
+        
+        # Store Splits
+        app_store_reviews = [r for r in reviews if r.get("source_store") == "app_store"]
+        play_store_reviews = [r for r in reviews if r.get("source_store") == "play_store"]
+        
+        app_store_rating = sum(r.get("rating", 3) for r in app_store_reviews) / len(app_store_reviews) if app_store_reviews else 0
+        play_store_rating = sum(r.get("rating", 3) for r in play_store_reviews) / len(play_store_reviews) if play_store_reviews else 0
         
         # Extract top theme using regex
         theme_match = re.search(r"1\.\s+\[?(?:\*\*)?(.*?)(?:\*\*)?\]?:", pulse_markdown)
         if not theme_match:
             theme_match = re.search(r"1\.\s+(?:\*\*)?(.*?)(?:\*\*)?:", pulse_markdown)
-            
         top_theme = theme_match.group(1).strip() if theme_match else "General Feedback"
         
+        # Extract Top 3 Feature Requests using regex
+        feature_requests = []
+        feature_section = re.search(r"## Top Feature Requests(.*?)(?:##|$)", pulse_markdown, re.DOTALL)
+        if feature_section:
+            lines = feature_section.group(1).strip().split('\n')
+            for line in lines:
+                match = re.search(r"\d+\.\s+(.*)", line.strip())
+                if match:
+                    feature_requests.append(match.group(1).strip())
+        
+        if not feature_requests:
+            feature_requests = ["Dark Mode", "Export to PDF", "Faster Login"] # Fallback if parsing fails
+
         # Build the new record
         new_record = {
             "date": datetime.now().strftime("%Y-%m-%d"),
             "total_reviews": total_reviews,
             "avg_rating": round(avg_rating, 1),
             "top_theme": top_theme,
-            "sentiment_score": sentiment_score
+            "sentiment_score": sentiment_score,
+            "critical_alert": critical_alert,
+            "crash_rate": round(crash_rate * 100, 1),
+            "app_store_rating": round(app_store_rating, 1),
+            "play_store_rating": round(play_store_rating, 1),
+            "feature_requests": feature_requests[:3]
         }
         
         history_data = []

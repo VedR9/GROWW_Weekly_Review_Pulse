@@ -22,9 +22,18 @@
   },
   {
     "date": "2026-05-28",
-    "total_reviews": 728,
+    "total_reviews": 680,
     "avg_rating": 3.5,
     "top_theme": "Login Issues",
-    "sentiment_score": 62
+    "sentiment_score": 61,
+    "critical_alert": true,
+    "crash_rate": 11.9,
+    "app_store_rating": 3.5,
+    "play_store_rating": 3.5,
+    "feature_requests": [
+      "Improved Login System",
+      "Enhanced Statement Download Functionality",
+      "Faster Customer Support Response"
+    ]
   }
 ]
