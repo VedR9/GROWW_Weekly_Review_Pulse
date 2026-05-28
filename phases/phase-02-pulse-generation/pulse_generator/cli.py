@@ -76,10 +76,23 @@ def main():
             for line in lines:
                 match = re.search(r"\d+\.\s+(.*)", line.strip())
                 if match:
-                    feature_requests.append(match.group(1).strip())
+                    raw_feature = match.group(1).strip()
+                    # Try to extract percentage like (15%) or - 15%
+                    pct_match = re.search(r"\(?(\d+)%\)?", raw_feature)
+                    if pct_match:
+                        pct = int(pct_match.group(1))
+                        # Remove the percentage string from the name
+                        name = re.sub(r"\s*\(?\d+%\)?\s*", "", raw_feature).strip()
+                        feature_requests.append({"name": name, "percentage": pct})
+                    else:
+                        feature_requests.append({"name": raw_feature, "percentage": None})
         
         if not feature_requests:
-            feature_requests = ["Dark Mode", "Export to PDF", "Faster Login"] # Fallback if parsing fails
+            feature_requests = [
+                {"name": "Dark Mode", "percentage": 15},
+                {"name": "Export to PDF", "percentage": 10},
+                {"name": "Faster Login", "percentage": 8}
+            ]
 
         # Build the new record
         new_record = {

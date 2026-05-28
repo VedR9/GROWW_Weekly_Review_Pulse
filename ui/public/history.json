@@ -31,9 +31,18 @@
     "app_store_rating": 3.5,
     "play_store_rating": 3.5,
     "feature_requests": [
-      "Improved Login System",
-      "Enhanced Statement Download Functionality",
-      "Faster Customer Support Response"
+      {
+        "name": "Improved Login System",
+        "percentage": 24
+      },
+      {
+        "name": "Enhanced Statement Download Functionality",
+        "percentage": 15
+      },
+      {
+        "name": "Faster Customer Support Response",
+        "percentage": 8
+      }
     ]
   }
 ]

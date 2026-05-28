@@ -161,12 +161,27 @@ function App() {
           <h2 className="section-title"><Lightbulb size={18} style={{ display: 'inline', marginRight: '8px' }}/>Feature Radar</h2>
           <p className="radar-subtitle">Most requested by users this week</p>
           <ul className="radar-list">
-            {(latest.feature_requests || []).map((feature, i) => (
-              <li key={i}>
-                <div className="radar-rank">{i + 1}</div>
-                <div className="radar-text">{feature}</div>
-              </li>
-            ))}
+            {(latest.feature_requests || []).map((feature, i) => {
+              const name = typeof feature === 'string' ? feature : feature.name;
+              const pct = typeof feature === 'string' ? null : feature.percentage;
+              
+              return (
+                <li key={i}>
+                  <div className="radar-rank">{i + 1}</div>
+                  <div style={{ flex: 1 }}>
+                    <div className="radar-text">{name}</div>
+                    {pct && (
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '6px' }}>
+                        <div style={{ flex: 1, height: '4px', background: 'rgba(255,255,255,0.1)', borderRadius: '2px', overflow: 'hidden' }}>
+                          <div style={{ width: `${pct}%`, height: '100%', background: 'var(--accent-primary)' }} />
+                        </div>
+                        <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{pct}%</span>
+                      </div>
+                    )}
+                  </div>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </div>

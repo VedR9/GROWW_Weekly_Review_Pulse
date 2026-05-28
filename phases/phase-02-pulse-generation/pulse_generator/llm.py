@@ -29,7 +29,7 @@ Constraints:
 1. Max 5 themes considered, but only surface the TOP 3 themes in the note.
 2. Provide exactly 3 real user quotes (anonymize them by removing names, emails, handles).
 3. Provide exactly 3 actionable ideas based on the themes.
-4. Provide exactly 3 Top Feature Requests based on what users are asking for (e.g. "Dark Mode", "Export to PDF").
+4. Provide exactly 3 Top Feature Requests based on what users are asking for. You MUST include an estimated percentage of users asking for this feature based on the review sample (e.g., "1. Dark Mode (15%)").
 5. The pulse body MUST be concise.
 6. Format the output in Markdown.
 
@@ -45,9 +45,9 @@ Output Format:
 3. [Theme 3]: [Brief description]
 
 ## Top Feature Requests
-1. [Feature 1]
-2. [Feature 2]
-3. [Feature 3]
+1. [Feature 1] ([X]%)
+2. [Feature 2] ([X]%)
+3. [Feature 3] ([X]%)
 
 ## User Quotes
 - "[Quote 1]"
@@ -86,9 +86,9 @@ def _mock_pulse() -> str:
 3. **Downloading Statements**: Users find it difficult to locate and download PDF statements.
 
 ## Top Feature Requests
-1. Dark Mode for the dashboard
-2. Fingerprint authentication on Android
-3. Export transaction history to Excel
+1. Dark Mode for the dashboard (18%)
+2. Fingerprint authentication on Android (12%)
+3. Export transaction history to Excel (8%)
 
 ## User Quotes
 - "Having login issues since the latest update. please fix."
