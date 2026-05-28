@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "Weekly app review pulse agent — phased implementation (Phase 1: ingest)."
 readme = "phases/phase-01-data-and-compliance/README.md"
 requires-python = ">=3.10"
-dependencies = ["python-dotenv", "httpx", "groq", "mcp"]
+dependencies = ["python-dotenv", "httpx", "groq", "mcp", "emoji", "langdetect"]
 
 [project.optional-dependencies]
 dev = ["pytest>=7.0"]
